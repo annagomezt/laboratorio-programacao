@@ -1,46 +1,47 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 function CadastrarTarefa() {
-  const [titulo, setTitulo] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [status, setStatus] = useState("");
-  const [prioridade, setPrioridade] = useState("");
-  const [dataLimite, setDataLimite] = useState("");
+  const [titulo, setTitulo] = useState('')
+  const [descricao, setDescricao] = useState('')
+  const [status, setStatus] = useState('pendente')
+  const [prioridade, setPrioridade] = useState('media')
+  const [dataLimite, setDataLimite] = useState('')
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   function cadastrarTarefa(evento) {
-    evento.preventDefault();
+    evento.preventDefault()
 
     const tarefa = {
       titulo: titulo,
-      descricao: descricao,
       status: status,
       prioridade: prioridade,
-      dataLimite: dataLimite,
-    };
+    }
+
+    if (descricao !== '') {
+      tarefa.descricao = descricao
+    }
+
+    if (dataLimite !== '') {
+      tarefa.dataLimite = dataLimite
+    }
 
     fetch('/api/tarefas', {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(tarefa),
     })
       .then((resposta) => {
-        console.log("Status:", resposta.status);
-
         if (resposta.ok) {
-          console.log("Cadastro realizado");
-          navigate("/tarefas");
-        } else {
-          console.log("Erro ao cadastrar");
+          navigate('/tarefas')
         }
       })
       .catch((erro) => {
-        console.log(erro);
-      });
+        console.log(erro)
+      })
   }
 
   return (
@@ -49,17 +50,18 @@ function CadastrarTarefa() {
 
       <form onSubmit={cadastrarTarefa}>
         <p>
-          <label>Título:</label>
+          <label>Título (obrigatório):</label>
           <br />
           <input
             type="text"
             value={titulo}
             onChange={(evento) => setTitulo(evento.target.value)}
+            required
           />
         </p>
 
         <p>
-          <label>Descrição:</label>
+          <label>Descrição (opcional):</label>
           <br />
           <input
             type="text"
@@ -71,25 +73,31 @@ function CadastrarTarefa() {
         <p>
           <label>Status:</label>
           <br />
-          <input
-            type="text"
+          <select
             value={status}
             onChange={(evento) => setStatus(evento.target.value)}
-          />
+          >
+            <option value="pendente">Pendente</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="concluida">Concluída</option>
+          </select>
         </p>
 
         <p>
           <label>Prioridade:</label>
           <br />
-          <input
-            type="text"
+          <select
             value={prioridade}
             onChange={(evento) => setPrioridade(evento.target.value)}
-          />
+          >
+            <option value="baixa">Baixa</option>
+            <option value="media">Média</option>
+            <option value="alta">Alta</option>
+          </select>
         </p>
 
         <p>
-          <label>Data limite:</label>
+          <label>Data limite (opcional):</label>
           <br />
           <input
             type="date"
@@ -105,7 +113,7 @@ function CadastrarTarefa() {
         <Link to="/">Voltar</Link>
       </p>
     </div>
-  );
+  )
 }
 
-export default CadastrarTarefa;
+export default CadastrarTarefa

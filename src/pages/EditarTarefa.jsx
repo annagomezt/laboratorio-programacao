@@ -7,8 +7,8 @@ function EditarTarefa() {
 
   const [titulo, setTitulo] = useState('')
   const [descricao, setDescricao] = useState('')
-  const [status, setStatus] = useState('')
-  const [prioridade, setPrioridade] = useState('')
+  const [status, setStatus] = useState('pendente')
+  const [prioridade, setPrioridade] = useState('media')
   const [dataLimite, setDataLimite] = useState('')
 
   useEffect(() => {
@@ -16,10 +16,10 @@ function EditarTarefa() {
       .then((resposta) => resposta.json())
       .then((dados) => {
         setTitulo(dados.titulo)
-        setDescricao(dados.descricao)
-        setStatus(dados.status)
-        setPrioridade(dados.prioridade)
-        setDataLimite(dados.dataLimite)
+        setDescricao(dados.descricao || '')
+        setStatus(dados.status || 'pendente')
+        setPrioridade(dados.prioridade || 'media')
+        setDataLimite(dados.dataLimite || '')
       })
       .catch((erro) => {
         console.log(erro)
@@ -31,10 +31,16 @@ function EditarTarefa() {
 
     const tarefa = {
       titulo: titulo,
-      descricao: descricao,
       status: status,
       prioridade: prioridade,
-      dataLimite: dataLimite,
+    }
+
+    if (descricao !== '') {
+      tarefa.descricao = descricao
+    }
+
+    if (dataLimite !== '') {
+      tarefa.dataLimite = dataLimite
     }
 
     fetch(`/api/tarefas/${id}`, {
@@ -60,17 +66,18 @@ function EditarTarefa() {
 
       <form onSubmit={editarTarefa}>
         <p>
-          <label>Título:</label>
+          <label>Título (obrigatório):</label>
           <br />
           <input
             type="text"
             value={titulo}
             onChange={(evento) => setTitulo(evento.target.value)}
+            required
           />
         </p>
 
         <p>
-          <label>Descrição:</label>
+          <label>Descrição (opcional):</label>
           <br />
           <input
             type="text"
@@ -82,25 +89,31 @@ function EditarTarefa() {
         <p>
           <label>Status:</label>
           <br />
-          <input
-            type="text"
+          <select
             value={status}
             onChange={(evento) => setStatus(evento.target.value)}
-          />
+          >
+            <option value="pendente">Pendente</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="concluida">Concluída</option>
+          </select>
         </p>
 
         <p>
           <label>Prioridade:</label>
           <br />
-          <input
-            type="text"
+          <select
             value={prioridade}
             onChange={(evento) => setPrioridade(evento.target.value)}
-          />
+          >
+            <option value="baixa">Baixa</option>
+            <option value="media">Média</option>
+            <option value="alta">Alta</option>
+          </select>
         </p>
 
         <p>
-          <label>Data limite:</label>
+          <label>Data limite (opcional):</label>
           <br />
           <input
             type="date"
