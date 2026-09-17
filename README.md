@@ -2,6 +2,14 @@
 
 Aplicação desenvolvida em React para consumo de uma API, permitindo realizar operações de cadastro, consulta, atualização e exclusão de tarefas.
 
+## Integrantes
+
+- Ana Beatriz Gomes Santos
+- Gustavo Giudicice Leite Campos
+- Rodrigo Dias Gastão
+
+Os nomes também estão disponíveis no arquivo `integrantes.txt`.
+
 ## Tecnologias utilizadas
 
 - React
