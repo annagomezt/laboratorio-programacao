@@ -2,17 +2,22 @@ import { Link } from 'react-router-dom'
 
 function Home() {
   return (
-    <div>
-      <h1>Gerenciamento de Tarefas</h1>
+    <main className="container">
+      <div className="header">
+        <h1>Gerenciador de Tarefas</h1>
+        <p>Cadastro e acompanhamento de tarefas</p>
+      </div>
 
-      <p>
-        <Link to="/tarefas">Consultar tarefas</Link>
-      </p>
+      <div className="menu">
+        <Link className="botao" to="/tarefas">
+          Consultar tarefas
+        </Link>
 
-      <p>
-        <Link to="/cadastrar">Cadastrar tarefa</Link>
-      </p>
-    </div>
+        <Link className="botao" to="/cadastrar">
+          Cadastrar tarefa
+        </Link>
+      </div>
+    </main>
   )
 }
 

@@ -41,38 +41,62 @@ function Tarefas() {
   }
 
   return (
-    <div>
-      <h1>Tarefas</h1>
+    <main className="container">
+      <div className="header">
+        <h1>Tarefas</h1>
+        <p>Lista de tarefas cadastradas</p>
+      </div>
 
-      <p>
-        <Link to="/">Voltar</Link>
-      </p>
+      <div className="menu">
+        <Link className="botao botao-secundario" to="/">
+          Início
+        </Link>
 
-      <p>
-        <Link to="/cadastrar">Cadastrar tarefa</Link>
-      </p>
+        <Link className="botao" to="/cadastrar">
+          Nova tarefa
+        </Link>
+      </div>
 
-      {tarefas.map((tarefa) => (
-        <div key={tarefa.id}>
-          <p>ID: {tarefa.id}</p>
-          <p>Título: {tarefa.titulo}</p>
-          <p>Descrição: {tarefa.descricao}</p>
-          <p>Status: {tarefa.status}</p>
-          <p>Prioridade: {tarefa.prioridade}</p>
-          <p>Data limite: {tarefa.dataLimite}</p>
+      <div className="lista-tarefas">
+        {tarefas.map((tarefa) => (
+          <div className="tarefa" key={tarefa.id}>
+            <h2>{tarefa.titulo}</h2>
 
-          <Link to={`/editar/${tarefa.id}`}>Editar</Link>
+            <p>
+              <strong>Descrição:</strong> {tarefa.descricao}
+            </p>
 
-          <br />
+            <p>
+              <strong>Status:</strong> {tarefa.status}
+            </p>
 
-          <button onClick={() => excluirTarefa(tarefa.id)}>
-            Excluir
-          </button>
+            <p>
+              <strong>Prioridade:</strong> {tarefa.prioridade}
+            </p>
 
-          <hr />
-        </div>
-      ))}
-    </div>
+            <p>
+              <strong>Data limite:</strong> {tarefa.dataLimite}
+            </p>
+
+            <div className="acoes">
+              <Link
+                className="botao"
+                to={`/editar/${tarefa.id}`}
+              >
+                Editar
+              </Link>
+
+              <button
+                className="botao-excluir"
+                onClick={() => excluirTarefa(tarefa.id)}
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
   )
 }
 

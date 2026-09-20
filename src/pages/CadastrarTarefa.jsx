@@ -45,34 +45,39 @@ function CadastrarTarefa() {
   }
 
   return (
-    <div>
-      <h1>Cadastrar Tarefa</h1>
+    <main className="container">
+      <div className="header">
+        <h1>Cadastrar Tarefa</h1>
+        <p>Preencha os dados da nova tarefa</p>
+      </div>
 
-      <form onSubmit={cadastrarTarefa}>
-        <p>
-          <label>Título (obrigatório):</label>
-          <br />
+      <form className="formulario" onSubmit={cadastrarTarefa}>
+        <div className="campo">
+          <label>
+            Título <span className="obrigatorio">*</span>
+          </label>
+
           <input
             type="text"
             value={titulo}
             onChange={(evento) => setTitulo(evento.target.value)}
             required
           />
-        </p>
+        </div>
 
-        <p>
-          <label>Descrição (opcional):</label>
-          <br />
+        <div className="campo">
+          <label>Descrição</label>
+
           <input
             type="text"
             value={descricao}
             onChange={(evento) => setDescricao(evento.target.value)}
           />
-        </p>
+        </div>
 
-        <p>
-          <label>Status:</label>
-          <br />
+        <div className="campo">
+          <label>Status</label>
+
           <select
             value={status}
             onChange={(evento) => setStatus(evento.target.value)}
@@ -81,11 +86,11 @@ function CadastrarTarefa() {
             <option value="em_andamento">Em andamento</option>
             <option value="concluida">Concluída</option>
           </select>
-        </p>
+        </div>
 
-        <p>
-          <label>Prioridade:</label>
-          <br />
+        <div className="campo">
+          <label>Prioridade</label>
+
           <select
             value={prioridade}
             onChange={(evento) => setPrioridade(evento.target.value)}
@@ -94,25 +99,25 @@ function CadastrarTarefa() {
             <option value="media">Média</option>
             <option value="alta">Alta</option>
           </select>
-        </p>
+        </div>
 
-        <p>
-          <label>Data limite (opcional):</label>
-          <br />
+        <div className="campo">
+          <label>Data limite</label>
+
           <input
             type="date"
             value={dataLimite}
             onChange={(evento) => setDataLimite(evento.target.value)}
           />
-        </p>
+        </div>
 
         <button type="submit">Cadastrar</button>
       </form>
 
-      <p>
-        <Link to="/">Voltar</Link>
-      </p>
-    </div>
+      <Link className="voltar" to="/">
+        Voltar
+      </Link>
+    </main>
   )
 }
 
