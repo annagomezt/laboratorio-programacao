@@ -6,6 +6,7 @@ Aplicação desenvolvida em React para consumo de uma API, permitindo realizar o
 
 - Ana Beatriz Gomes Santos
 - Gustavo Giudicice Leite Campos
+- Rafael Nascimento Dias
 - Rodrigo Dias Gastão
 
 Os nomes também estão disponíveis no arquivo `integrantes.txt`.
